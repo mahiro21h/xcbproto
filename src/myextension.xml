@@ -1,0 +1,80 @@
+<xcb header="myextension" extension-xname="MIT-MY-EXTENSION" extension-name="Myextension" major-version="1" minor-version="1">
+
+  <!-- Types -->
+
+  <import>xproto</import>
+
+  <enum name="Event">
+    <item name="NotifyMask"><bit>0</bit></item>
+  </enum>
+  <enum name="State">
+    <item name="Off">      <value>0</value> </item>
+    <item name="On">       <value>1</value> </item>
+    <item name="Cycle">    <value>2</value> </item>
+    <item name="Disabled"> <value>3</value> </item>
+  </enum>
+
+  <!-- Errors -->
+  <!-- Requests -->
+  <request name="QueryVersion" opcode="0">
+    <field type="CARD8" name="client_major_version"/>
+    <field type="CARD8" name="client_minor_version"/>
+    <pad bytes="2"/>
+    <reply>
+      <pad bytes="1"/>
+      <field type="CARD16" name="server_major_version"/>
+      <field type="CARD16" name="server_minor_version"/>
+      <pad bytes="20"/>
+    </reply>
+  </request>
+
+  <request name="QueryInfo" opcode="1">
+    <field type="DRAWABLE" name="drawable"/>
+    <reply>
+      <field type="CARD8" name="state"/>
+      <field type="WINDOW" name="saver_window"/>
+      <field type="CARD32" name="ms_until_server"/>
+      <field type="CARD32" name="ms_since_user_input"/>
+      <field type="CARD32" name="event_mask" />
+      <field type="BYTE" name="kind" enum="Kind"/>
+      <pad bytes="7"/>
+    </reply>
+  </request>
+
+  <request name="LockScreen" opcode="2">
+    <reply>
+      <field type="CARD8" name="state"/>
+      <field type="WINDOW" name="saver_window"/>
+      <field type="CARD32" name="ms_until_server"/>
+      <field type="CARD32" name="ms_since_user_input"/>
+      <field type="CARD32" name="event_mask" />
+      <field type="BYTE" name="kind" enum="Kind"/>
+      <pad bytes="7"/>
+    </reply>
+  </request>
+
+  <request name="UnlockScreen" opcode="3">
+    <reply>
+      <field type="CARD8" name="state"/>
+      <field type="WINDOW" name="saver_window"/>
+      <field type="CARD32" name="ms_until_server"/>
+      <field type="CARD32" name="ms_since_user_input"/>
+      <field type="CARD32" name="event_mask" />
+      <field type="BYTE" name="kind" enum="Kind"/>
+      <pad bytes="7"/>
+    </reply>
+  </request>
+
+  <!-- Events -->
+
+  <event name="Notify" number="0">
+    <field type="BYTE" name="state" enum="State"/>
+    <field type="TIMESTAMP" name="time"/>
+    <field type="WINDOW" name="root"/>
+    <field type="WINDOW" name="window"/>
+    <field type="BYTE" name="kind" enum="Kind"/>
+    <field type="BOOL" name="forced"/>
+    <pad bytes="14"/>
+  </event>
+
+</xcb>

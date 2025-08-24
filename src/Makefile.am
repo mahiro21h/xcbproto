@@ -31,7 +31,8 @@ xcbinclude_HEADERS = \
 	xselinux.xml \
 	xtest.xml \
 	xv.xml \
-	xvmc.xml
+	xvmc.xml \
+	myextension.xml
 
 if HAVE_XMLLINT
 check-local:
