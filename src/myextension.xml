@@ -24,6 +24,26 @@
   <request name="UnlockScreen" opcode="3">
   </request>
 
+  <request name="RegisterScreenLocker" opcode="4">
+    <field type="INT32"  name="pid"/>
+    <field type="CARD32" name="exec_path_len"/> <!-- unused -->
+    <pad bytes="20"/>
+    <list type="char"    name="exec_path"> <!-- unused -->
+        <fieldref>exec_path_len</fieldref>
+    </list>
+    <reply>
+      <field type="CARD8"  name="response"/>
+      <field type="CARD32" name="exec_path_len"/>
+      <pad bytes="20"/>
+      <list type="char"    name="exec_path">
+          <fieldref>exec_path_len</fieldref>
+      </list>
+    </reply>
+  </request>
+
+  <request name="UnregisterScreenLocker" opcode="5">
+  </request>
+
   <!-- Events -->
 
 </xcb>
