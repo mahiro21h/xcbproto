@@ -44,6 +44,24 @@
   <request name="UnregisterScreenLocker" opcode="5">
   </request>
 
+  <request name="CreateWindow" opcode="6">
+    <field type="Window" name="parent"/>
+    <field type="VISUALID" name="visual"/>
+    <field type="CARD32" name="background_pixel_len"/>
+    <pad bytes="20"/>
+    <list type="CARD32" name="background_pixel">
+      <fieldref>background_pixel_len</fieldref>
+    </list>
+    <reply>
+      <field type="CARD8"  name="response"/>
+      <field type="Window" name="locker_window"/>
+    </reply>
+  </request>
+
+  <request name="DestroyWindow" opcode="7">
+    <field type="Window" name="locker_window"/>
+  </request>
+
   <!-- Events -->
 
 </xcb>
